@@ -1,5 +1,5 @@
 <?php
-require 'data.php';
+require_once __DIR__ . '/data.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,57 +7,51 @@ require 'data.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MiniShop - Catalog (Buoi1)</title>
+    <title>Danh sách sản phẩm</title>
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
+         /* body {
+            font-family: Arial, Helvetica, sans-serif; 
+        } */
         table{
             border-collapse: collapse;
             width: 600px;
         }
-        table, th, td{
-            border: 1px solid #000;
-        }
+        /* table, th, td{
+            border: 1px solid #000;aaaa
+        } */
         th, td{
             padding: 10px;
             text-align: center;
         }
-        th{
+        /* th{
             background-color: #f2f2f2;
-        }
+        } */
     </style>
 </head>
 <body>
-    <h1>MiniShop - Catalog (Buoi1)</h1>
+    <h1>Danh sách sản phẩm</h1>
     <table>
-        <thead>
             <tr>
                 <th>SKU</th>
                 <th>Name</th>
-                <th>Price</th>
-                <th>Category</th>
+                <th>Danh mục</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
             </tr>
-        </thead>
-        <tbody>
-            <?php foreach($products as $product): ?>
-                <?php 
-                    $category_name = '';
-                    foreach($categories as $category){
-                        if($category['id'] == $product['category_id']){
-                            $category_name = $category['name'];
-                            break;
-                        }
-                    }
-                ?>
+            <?php foreach ($products as $product): ?>
                 <tr>
-                    <td><?php echo $product['sku']; ?></td>
-                    <td><?php echo $product['name']; ?></td>
-                    <td><?php echo number_format($product['price'], 0, ',', '.'); ?> VND</td>
-                    <td><?php echo $category_name; ?></td>
+                    <td><?= htmlspecialchars($product['sku']) ?></td>
+                    <td><?= htmlspecialchars($product['name']) ?></td>
+                    <td><?= htmlspecialchars($product['category_name']) ?></td>
+                    <td><?= number_format($product['price'])?></td>
+                    <td><?= htmlspecialchars($product['qty']) ?></td>
+                    <td><?= number_format($product['line_total']) ?></td>
                 </tr>
             <?php endforeach; ?>
-        </tbody>
     </table>
+    <h3> Số sản phẩm = <?= count($products) ?></h3>
+    <h3> Tổng giá trị khi bán hết = <?= number_format($totalInventory) ?> VND</h3>
+    <pre><?php var_dump($products); ?></pre>
 </body>
 </html>
