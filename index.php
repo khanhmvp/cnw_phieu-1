@@ -52,6 +52,6 @@ require_once __DIR__ . '/data.php';
     </table>
     <h3> Số sản phẩm = <?= count($products) ?></h3>
     <h3> Tổng giá trị khi bán hết = <?= number_format($totalInventory) ?> VND</h3>
-    <pre><?php var_dump($products); ?></pre>
+    <!-- <pre><?php var_dump($products); ?></pre> -->
 </body>
 </html>
