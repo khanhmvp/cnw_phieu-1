@@ -15,3 +15,14 @@ $products = [
     ['sku' => 'MN-01', 'name' => 'Dell 24 inch', 'category_id' => 3, 'price' => 3200000, 'qty' => 2],
     ['sku' => 'MN-02', 'name' => 'LG UltraFine', 'category_id' => 3, 'price' => 8500000, 'qty' => 1],
 ];
+$categoryMap = [];
+foreach ($categories as $category) {
+    $categoryMap[$category['id']] = $category['name'];
+}
+$totalInventory = 0;
+foreach ($products as &$product) {
+    $product['line_total'] = $product['price'] * $product['qty'];
+    $product['category_name'] = $categoryMap[$product['category_id']];
+    $totalInventory += $product['line_total'];
+}
+unset($product); // Unset the reference to avoid unexpected behavior
